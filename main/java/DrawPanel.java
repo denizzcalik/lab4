@@ -22,13 +22,13 @@ public class DrawPanel extends JPanel{
 
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, ArrayList<Car> cars) {
+    public DrawPanel(int x, int y, ArrayList<Car> cars, CarShop<Volvo240> workshop) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         this.carAndImage = new HashMap<Car, BufferedImage>();
         this.cars = cars;
-        this.VolvoWorkshop = new CarShop<>(1, 300, 300);
+        this.VolvoWorkshop = workshop;
 
         // Print an error message in case file is not found with a try/catch block
         for (Car car: cars) {
@@ -63,13 +63,13 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-            for (Car car : cars) {
-                int x = (int) car.getX();
-                int y = (int) car.getY();
-                g.drawImage(carAndImage.get(car), x, y, null); // see javadoc for more info on the parameters
+        for (Car car : cars) {
+            int x = car.getX();
+            int y = car.getY();
+            g.drawImage(carAndImage.get(car), x, y, null); // see javadoc for more info on the parameters
 
-            }
-        g.drawImage(VolvoImage, 300, 300, null);
+        }
+        g.drawImage(VolvoImage, VolvoWorkshop.getX(), VolvoWorkshop.getY(), null);
 
     }
 }

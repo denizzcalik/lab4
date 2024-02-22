@@ -11,65 +11,22 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
-    // member fields:
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
+public class CarController implements CarViewListener {
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    private static final int X = 800;
+    private static final int Y = 800;
+
     // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<Car> cars;
 
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        //
-        cc.cars.add(new Volvo240(Color.blue, 300, 5));
-        cc.cars.add(new Saab95(Color.blue, 300, 105));
-        cc.cars.add(new Scania(Color.blue, 300, 205));
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
+    public CarController(ArrayList<Car> cars) {
+        this.cars = cars;
     }
-
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
 
-                if (x < 0 || x >= frame.drawPanel.getWidth() - 70) {
-                    car.turnLeft();
-                    car.turnLeft();
-                }
-
-                if (y <= 0 || y >= frame.drawPanel.getHeight() - 70) {
-                    car.turnLeft();
-                    car.turnLeft();
-                }
-
-                VolvoCarShopCollision();
-
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-            }
-        }
-    }
 
     // Calls the gas method for each car once
     protected void gas(int amount) {
@@ -128,21 +85,47 @@ public class CarController {
             car.startEngine();
         }
     }
-    protected void VolvoCarShopCollision(){
-        for (Car car : cars){
-            double x = car.getX();
-            double y = car.getY();
-            if (frame.drawPanel.VolvoWorkshop.getX() - 10 < x && x < frame.drawPanel.VolvoWorkshop.getX() + 10
-                    && frame.drawPanel.VolvoWorkshop.getY() - 10 < y && y < frame.drawPanel.VolvoWorkshop.getY() + 10){
-                if (car instanceof Volvo240){
-                    frame.drawPanel.VolvoWorkshop.load((Volvo240)car);
-                    car.stopEngine();
-                }
 
 
-        }
+    @Override
+    public void onGas(int amount) {
+        gas(amount);
     }
 
-}}
+    @Override
+    public void onBrake(int amount) {
+        brake(amount);
+    }
+
+    @Override
+    public void onTurboOn() {
+        turboOn();
+    }
+
+    @Override
+    public void onTurboOff() {
+        turboOff();
+    }
+
+    @Override
+    public void onLiftBed() {
+        raiseScaniaPlatform();
+    }
+
+    @Override
+    public void onLowerBed() {
+        lowerScaniaPlatform();
+    }
+
+    @Override
+    public void onStartAllCars() {
+        startAllCars();
+    }
+
+    @Override
+    public void onStopAllCars() {
+        stopAllCars();
+    }
+}
 
 

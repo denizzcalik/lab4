@@ -4,7 +4,7 @@ public class CarShop <T extends Car>{
 
     protected Loadable<T> loadable;
 
-    public CarShop(int capacity, double x, double y){
+    public CarShop(int capacity, int x, int y){
         this.loadable = new Loadable<>(capacity, x, y);
     }
     
@@ -19,10 +19,10 @@ public class CarShop <T extends Car>{
     public int nrOfLoadedCars() { //Needed to solve protected access in CarShopTest
         return loadable.nrOfLoadedCars();
     }
-    public double getX() {
+    public int getX() {
         return loadable.getX();
     }
-    public double getY() {
+    public int getY() {
         return loadable.getY();
     }
 

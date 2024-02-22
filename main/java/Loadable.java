@@ -8,11 +8,11 @@ public class Loadable <T extends Car> implements Loading<T> {
     private final int maxLoad;
     private final ArrayList<T> loadedCars;
     private static final double loadingRadius = 3;
-    private double x;
-    private double y;
+    private int x;
+    private int y;
 
 
-    public Loadable(int maxLoad, double x, double y){
+    public Loadable(int maxLoad, int x, int y){
         this.maxLoad = maxLoad;
         this.loadedCars = new ArrayList<>();
         this.x = x;
@@ -20,18 +20,18 @@ public class Loadable <T extends Car> implements Loading<T> {
     }
 
 
-    public void move(double x, double y){
+    public void move(int x, int y){
         this.x = x;
         this.y = y;
     }
 
 
-    public double getX(){
+    public int getX(){
         return this.x;
     }
 
 
-    public double getY(){
+    public int getY(){
         return this.y;
     }
 

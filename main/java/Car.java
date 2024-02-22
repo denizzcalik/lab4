@@ -7,12 +7,12 @@ public abstract class Car implements Movable {
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private double x;
-    private double y;
+    private int x;
+    private int y;
     private double direction;
     private CarSize size;
 
-    Car(int doors, double horsepower, Color carcolor, String model, double x, double y, CarSize size) {
+    Car(int doors, double horsepower, Color carcolor, String model, int x, int y, CarSize size) {
         this.nrDoors = doors;
         this.enginePower = horsepower;
         this.currentSpeed = 0;
@@ -101,19 +101,19 @@ public abstract class Car implements Movable {
         y += currentSpeed * Math.cos(direction);
 
     }
-    public double getX(){
+    public int getX(){
         return this.x;
     }
-    public double getY(){
+    public int getY(){
         return this.y;
     }
     public double getDirection(){
         return this.direction;
     }
-    protected void setX(double x){
+    protected void setX(int x){
         this.x = x;
     }
-    protected void setY(double y){
+    protected void setY(int y){
         this.y = y;
     }
     protected void setDirection(double direction){
