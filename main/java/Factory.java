@@ -1,19 +1,28 @@
 package Lab3.main.java;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.function.Supplier;
 
 public class Factory {
-    public static Volvo240 createVolvo240(Color color, int x, int y){
-        return new Volvo240(color, x, y);
-    }
+    protected Map<String, Supplier<Car>> carConstructors = new HashMap<>();
+    private Random random = new Random();
 
-    public static Saab95 createSaab95(Color color, int x, int y){
-        return new Saab95(color, x, y);
-    }
-    public static Scania createScania(Color color, int x, int y){
-        return new Scania(color, x, y);
+    public Factory() {
+        carConstructors.put("Volvo240", () -> new Volvo240(Color.BLUE, 300, random.nextInt(400)));
+        carConstructors.put("Saab95", () -> new Saab95(Color.RED, 300, random.nextInt(400)));
+        carConstructors.put("Scania", () -> new Scania(Color.GREEN, 300, random.nextInt(400)));
     }
     public static CarShop<Volvo240> createVolvoCarShop(int capacity, int x, int y){
-        return new CarShop<Volvo240>(capacity, x, y);
+        return new CarShop<>(capacity, x, y);
     }
-}
+
+    public Car getCar(String carModel) {
+        if (carConstructors.containsKey(carModel)) {
+            return carConstructors.get(carModel).get();
+        } else {
+            throw new IllegalArgumentException("Invalid car model: " + carModel);
+        }
+}}

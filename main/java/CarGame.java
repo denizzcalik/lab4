@@ -13,12 +13,9 @@ public class CarGame {
         ArrayList<Car> cars = new ArrayList<>();
         // Instance of this class
 
-        cars.add(Factory.createVolvo240(Color.blue, 300, 5));
-        cars.add(Factory.createSaab95(Color.blue, 300, 105));
-        cars.add(Factory.createScania(Color.blue, 300, 205));
+        Factory factory = new Factory();
 
-
-        CarController cc = new CarController(cars);
+        CarController cc = new CarController(cars, factory);
 
         Widget buttonListener = new Widget(cc);
 

@@ -9,4 +9,6 @@ public interface WidgetListener {
     void onLowerBed();
     void onStartAllCars();
     void onStopAllCars();
+    void onAddCar(String carModel);
+    void onDeleteCar();
 }

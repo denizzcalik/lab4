@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class Widget {
     JPanel controlPanel = new JPanel();
-
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner;
     int gasAmount = 0;
@@ -22,6 +21,9 @@ public class Widget {
     JButton lowerBedButton = new JButton("Lower Lift Bed");
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+    JButton addCarButton = new JButton("Add Car");
+    JButton deleteCarButton = new JButton("Delete car");
+    JComboBox<String> carTypeComboBox = new JComboBox<>(new String[]{"Saab95", "Volvo240", "Scania", "Random"});
     static ArrayList<JComponent> components = new ArrayList<>();
     public Widget(WidgetListener listener){
         SpinnerModel spinnerModel =
@@ -35,14 +37,13 @@ public class Widget {
             public void stateChanged(ChangeEvent e) {
                 gasAmount = (int) ((JSpinner) e.getSource()).getValue();
                 brakeAmount = (int) ((JSpinner) e.getSource()).getValue();
-
             }
         });
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
-        controlPanel.setLayout(new GridLayout(2, 4));
+        controlPanel.setLayout(new GridLayout(2, 6));
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(brakeButton, 1);
@@ -52,6 +53,9 @@ public class Widget {
         controlPanel.add(lowerBedButton, 5);
         controlPanel.add(startButton, 6);
         controlPanel.add(stopButton, 7);
+        controlPanel.add(addCarButton, 8);
+        controlPanel.add(deleteCarButton, 9);
+        controlPanel.add(carTypeComboBox, 10);
 
         addComponents(controlPanel);
         addComponents(gasPanel);
@@ -64,12 +68,12 @@ public class Widget {
         lowerBedButton.addActionListener(e -> listener.onLowerBed());
         startButton.addActionListener(e -> listener.onStartAllCars());
         stopButton.addActionListener(e -> listener.onStopAllCars());
-
+        addCarButton.addActionListener(e -> listener.onAddCar((String) carTypeComboBox.getSelectedItem()));
+        deleteCarButton.addActionListener(e -> listener.onDeleteCar());
     }
     private void addComponents(JComponent component){
         components.add(component);
     }
-
     public static ArrayList<JComponent> returnComponents(){
         return components;
     }

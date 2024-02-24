@@ -30,36 +30,27 @@ public class DrawPanel extends JPanel{
         this.cars = cars;
         this.VolvoWorkshop = workshop;
 
-        // Print an error message in case file is not found with a try/catch block
-        for (Car car: cars) {
+        try {
+            VolvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream(
+                    "../pics/VolvoBrand.jpg"));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+
+        }
+    }
+    public void carsToImage() {
+        for (Car car : cars) {
             try {
-
-                // You can remove the "Lab2.pics" part if running outside of IntelliJ and
-                // everything is in the same main folder.
-                // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
-
-                // Rememember to rightclick src New -> Package -> name: Lab2.pics -> MOVE *.jpg to Lab2.pics.
-                // if you are starting in IntelliJ.
                 carAndImage.put(car, ImageIO.read(DrawPanel.class.getResourceAsStream(
                         "../pics/" + car.getModelName() + ".jpg")));
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
         }
-        try {
-            VolvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream(
-                    "../pics/VolvoBrand.jpg"));
 
-        } catch (IOException ex) {
-            ex. printStackTrace();
-
-        }
     }
-
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

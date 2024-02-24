@@ -37,7 +37,7 @@ public class CarView extends JFrame{
 
         for (JComponent component: components) {
             if (component.getLayout() instanceof GridLayout) {
-                component.setPreferredSize(new Dimension((X / 2) + 4, 200));
+                component.setPreferredSize(new Dimension((X / 2) + 250, 200));
                 component.setBackground(Color.RED);
                 component.setForeground(Color.RED);
                 this.add(component);

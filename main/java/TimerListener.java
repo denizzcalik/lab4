@@ -16,6 +16,7 @@ public class TimerListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        frame.drawPanel.carsToImage();
         for (Car car : cars) {
             car.move();
             int x = Math.round(car.getX());
@@ -36,6 +37,8 @@ public class TimerListener implements ActionListener {
             // repaint() calls the paintComponent method of the panel
             frame.drawPanel.repaint();
         }
+        frame.drawPanel.repaint();
+
     }
 
 
