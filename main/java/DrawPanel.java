@@ -25,7 +25,7 @@ public class DrawPanel extends JPanel{
     public DrawPanel(int x, int y, ArrayList<Car> cars, CarShop<Volvo240> workshop) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
+        this.setBackground(Color.blue);
         this.carAndImage = new HashMap<Car, BufferedImage>();
         this.cars = cars;
         this.VolvoWorkshop = workshop;

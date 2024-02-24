@@ -18,8 +18,8 @@ public class TimerListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         for (Car car : cars) {
             car.move();
-            int x = (int) Math.round(car.getX());
-            int y = (int) Math.round(car.getY());
+            int x = Math.round(car.getX());
+            int y = Math.round(car.getY());
 
             if (x < 0 || x >= frame.drawPanel.getWidth() - 70) {
                 car.turnLeft();
@@ -40,7 +40,6 @@ public class TimerListener implements ActionListener {
 
 
     protected void VolvoCarShopCollision() {
-
         for (Car car : cars) {
             double x = car.getX();
             double y = car.getY();

@@ -13,14 +13,16 @@ public class CarGame {
         ArrayList<Car> cars = new ArrayList<>();
         // Instance of this class
 
-        cars.add(CarFactory.createVolvo240(Color.blue, 300, 5));
-        cars.add(CarFactory.createSaab95(Color.blue, 300, 105));
-        cars.add(CarFactory.createScania(Color.blue, 300, 205));
+        cars.add(Factory.createVolvo240(Color.blue, 300, 5));
+        cars.add(Factory.createSaab95(Color.blue, 300, 105));
+        cars.add(Factory.createScania(Color.blue, 300, 205));
 
 
         CarController cc = new CarController(cars);
 
-        CarView view = new CarView("CarSim 1.0", cc, cars, CarFactory.createVolvoCarShop(1, 300, 300));
+        Widget buttonListener = new Widget(cc);
+
+        CarView view = new CarView("CarSim 1.0", cars, Factory.createVolvoCarShop(1, 300, 300));
 
         Timer timer = new Timer(delay, new TimerListener(cars, view));
 

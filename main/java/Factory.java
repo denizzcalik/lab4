@@ -2,7 +2,7 @@ package Lab3.main.java;
 
 import java.awt.*;
 
-public class CarFactory {
+public class Factory {
     public static Volvo240 createVolvo240(Color color, int x, int y){
         return new Volvo240(color, x, y);
     }

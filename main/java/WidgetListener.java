@@ -1,6 +1,6 @@
 package Lab3.main.java;
 
-public interface CarViewListener {
+public interface WidgetListener {
     void onGas(int amount);
     void onBrake(int amount);
     void onTurboOn();

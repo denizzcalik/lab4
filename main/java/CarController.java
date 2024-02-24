@@ -1,9 +1,5 @@
 package Lab3.main.java;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -11,10 +7,8 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController implements CarViewListener {
-    // The frame that represents this instance View of the MVC pattern
-    private static final int X = 800;
-    private static final int Y = 800;
+public class CarController implements WidgetListener {
+
 
     // A list of cars, modify if needed
     ArrayList<Car> cars;
