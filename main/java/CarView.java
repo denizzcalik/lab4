@@ -4,54 +4,38 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * This class represents the full view of the MVC pattern of your car simulator.
- * It initializes with being center on the screen and attaching it's controller in it's state.
- * It communicates with the Controller by calling methods of it when an action fires of in
- * each of it's components.
- * TODO: Write more actionListeners and wire the rest of the buttons
- **/
-
 public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
     DrawPanel drawPanel;
+    Model model;
 
-    // Constructor
-    public CarView(String framename, ArrayList<Car> cars, CarShop<Volvo240> workshop){
-        this.drawPanel = new DrawPanel(X, Y-240, cars, workshop);
+    public CarView(String framename, Model model){
+        this.drawPanel = new DrawPanel(model.settings.getX(), model.settings.getY()-240, model);
+        this.model = model;
         initComponents(framename);
     }
-
-    // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
 
         this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
+        this.setPreferredSize(new Dimension(model.settings.getX(), model.settings.getY()));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         ArrayList<JComponent> components = Widget.returnComponents();
-
         this.add(drawPanel);
 
         for (JComponent component: components) {
             if (component.getLayout() instanceof GridLayout) {
-                component.setPreferredSize(new Dimension((X / 2) + 250, 200));
+                component.setPreferredSize(new Dimension((model.settings.getX() / 2) + 250, 200));
                 component.setBackground(Color.RED);
                 component.setForeground(Color.RED);
                 this.add(component);
             }
-
             else{
                 component.setPreferredSize(new Dimension(100, 100));
                 this.add(component);
             }
         }
-
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
-
         // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         // Center the frame
